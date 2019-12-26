@@ -1,0 +1,9 @@
+{
+    "main": "index.js",
+    "dependencies": {
+        "chalk": "^3.0.0",
+        "dank-twitch-irc": "^3.0.5",
+        "fs": "0.0.1-security",
+        "readline-sync": "^1.4.10"
+    }
+}
