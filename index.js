@@ -33,7 +33,7 @@ async function initmain(){
         //     break;
         case 0:
             console.log(`\nLogin menu`);
-            if (!fs.existsSync(`${__dirname}\\accounts`)) fs.mkdirSync(`${__dirname}\\accounts`);
+            if (!fs.existsSync('./accounts')) fs.mkdirSync('accounts');
             fs.readdir('./accounts', (err, files) => {
                 if (err) return console.log(err);
                 files = files.filter(f => f.endsWith('.json'));
@@ -95,11 +95,11 @@ async function validateAcc(creds, wtd){
     });
 }
 async function saveAcc(newAcc){
-    if (!fs.existsSync(`${__dirname}\\accounts`)) fs.mkdirSync(`${__dirname}\\accounts`);
-    console.log(fs.existsSync(`${__dirname}\\accounts\\${newAcc.username}.json`)
+    if (!fs.existsSync('./accounts')) fs.mkdirSync('accounts');
+    console.log(fs.existsSync(`./accounts/${newAcc.username}.json`)
     ?chalk.redBright(`Account ${newAcc.username} already exists, overwriting!`)
     :chalk.yellowBright(`Saving ${newAcc.username}...`));
-    fs.writeFileSync(`${__dirname}\\accounts\\${newAcc.username}.json`, JSON.stringify(newAcc, null, 4));
+    fs.writeFileSync(`./accounts/${newAcc.username}.json`, JSON.stringify(newAcc, null, 4));
     console.log(chalk.greenBright(`Account ${newAcc.username} saved successfully!\n`));
     rl.keyInPause(chalk.blueBright('Return to account selection'));
     return initmain();
