@@ -33,14 +33,15 @@ async function initmain(){
         //     break;
         case 0:
             console.log(`\nLogin menu\nIf there are no accounts, hit 0 to add new one`);
-            fs.readdir('./json/accounts', (err, files) => {
+            if (!fs.existsSync(`${__dirname}\\accounts`)) fs.mkdirSync(`${__dirname}\\accounts`);
+            fs.readdir('./accounts', (err, files) => {
                 if (err) return console.log(err);
                 files = files.filter(f => f.endsWith('.json'));
                 let accArr = [];
                 files.forEach(file => accArr.push(file.slice(0, -5)));
                 let accIndex = rl.keyInSelect(accArr, chalk.magentaBright('Select account: '), {guide: false, cancel: 'Exit and add new account'});
                 if (accIndex == -1) return initmain();
-                return validateAcc(require(`./json/accounts/${accArr[accIndex]}`), 'log');
+                return validateAcc(require(`./accounts/${accArr[accIndex]}`), 'log');
             });
             break;
         case 1:
